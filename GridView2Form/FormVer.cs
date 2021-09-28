@@ -63,23 +63,43 @@ namespace GridView2Form
             //Indice de donde esta parado el usuario en el datagriview
             a = dgvProductos.CurrentCell.RowIndex;
 
-            string texto = (string)dgvProductos.Rows[a].Cells[1].Value;
-         
-       //valida de que no sea la celda en blanco , o sea la primera si no hay datos, y que tampoco sea la de titulos
+            
+                string texto = (string)dgvProductos.Rows[a].Cells[1].Value;
+            int codigo2 = Convert.ToInt32(dgvProductos.Rows[a].Cells[0].Value);
 
-              
-                if ((a != -1) && ( texto!=null))
+
+
+            //valida de que no sea la celda en blanco , o sea la primera si no hay datos, y que tampoco sea la de titulos
+
+
+            if ((a != -1) && (texto!=null))
+                {
+                int codigo = Convert.ToInt32(dgvProductos.Rows[a].Cells[0].Value);
+                MessageBox.Show("Borrando fila Actual ");
+
+                    dgvProductos.Rows.RemoveAt(a);
+                
+                   
+
+                    foreach (Producto prod in ListaProducto)
                     {
-                       
-                      MessageBox.Show("Borrando fila Actual ");
 
-                      dgvProductos.Rows.RemoveAt(a);
+                        if (codigo == prod.Codigo)
+                        {
+                            ListaProducto.Remove(prod);
+                            break;
 
-                     lblDatos.Text = "";
+                        }
+
+
                     }
+
+
+                    lblDatos.Text = "";
                 }
-              
+            }
+            
+              }
             
         }
-    }
-
+    
